@@ -59,7 +59,7 @@ REDDIT_USER_AGENT=tech-trend-monitor/1.0 (tech research; your@email.com)
 
 ```bash
 python main.py --topic ai --top 5 --no-comments
-python main.py --urls https://www.reddit.com/search.json?q=claude
+python main.py --urls https://www.reddit.com/r/claude/.json
 python main.py --subreddits programming, devops --days 7 --limit 50
 
 ```
