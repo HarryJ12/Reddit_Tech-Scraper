@@ -86,7 +86,7 @@ reddit-tech-trends/
 
 ---
 
-## Using the Output with an AI Agent
+## Using the Output with an external Chatbot
 
 The `.md` report this tool generates can be fed into an LLM for a more summarized and conclusive analysis. Copy the contents of the report and use `SUMMARY_PROMPT.md` (included in this repo) as the system prompt any LLM of your choice (it is recommended to make a custom agent for repeatable use).
 
