@@ -8,15 +8,26 @@ Built in Python with three dependencies: `requests` (Reddit API), `pydantic` (da
 
 ## How It Works
 
-1. **Fetch**: `reddit_client.py` pulls posts via Reddit's OAuth API or public JSON endpoints (OAuth API is NOT required). Rate-limited with a token bucket, responses are cached to disk in `.cache/` with a 5-hour TTL.
+1. **Fetch**: `reddit_client.py` pulls posts via Reddit's OAuth API OR public JSON endpoints. Rate-limited with a token bucket, responses are cached to disk in `.cache/` with a 5-hour TTL.
 
 2. **Classify**: `tech_classifier.py` labels each post `HIGH_SIGNAL` or `LOW_SIGNAL` via keyword patterns. High-signal = specific tools, libraries, frameworks, infra. Low-signal = memes, politics, vague questions, hype.
 
-3. **Collect**: `pipeline.py` orchestrates fetch + classify across all configured subreddits. 
+3. **Collect**: `pipeline.py` orchestrates fetch + classify across all configured subreddits.
 
 4. **Analyze**: `analyze.py` extracts named tech entities, clusters posts by entity, scores each cluster by engagement (`upvotes × 0.5 + comments × 0.3 + comment_upvotes × 0.2`), and generates a structured trend report.
 
 5. **Output**: Ranked console summary. Writes Markdown and JSON to `output/`.
+
+---
+
+## Data Source
+
+This tool can fetch Reddit data in two ways:
+
+- **Without credentials** - Uses Reddit’s public `.json` endpoints (e.g. appending `.json` to subreddit URLs). No setup required, but rate limits are stricter.
+- **With credentials** - Uses Reddit’s official API via OAuth for higher rate limits and more reliable access.
+
+For lightweight usage or quick experiments, the `.json` approach is sufficient. For larger or repeated runs, credentials are recommended.
 
 ---
 
@@ -34,7 +45,7 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Credentials are optional, but they gives better rate limits. To get them: [reddit.com/prefs/apps](https://www.reddit.com/prefs/apps) -> create a **script** app -> add to `.env`:
+Credentials are optional, but they give slightly better rate limits. To get them: [reddit.com/prefs/apps](https://www.reddit.com/prefs/apps) -> create a **script** app -> add to `.env`:
 
 ```env
 REDDIT_CLIENT_ID=...
