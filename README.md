@@ -24,7 +24,7 @@ Built in Python with three dependencies: `requests` (Reddit API), `pydantic` (da
 
 This tool can fetch Reddit data in two ways:
 
-- **Without credentials** - Uses Reddit’s public `.json` endpoints (e.g. appending `.json` to subreddit URLs). No setup required, but rate limits are stricter.
+- **Without credentials** - Uses Reddit’s public `.json` endpoints (by just appending `.json` to subreddit URLs). No setup required!
 - **With credentials** - Uses Reddit’s official API via OAuth for higher rate limits and more reliable access.
 
 For lightweight usage or quick experiments, the `.json` approach is sufficient. For larger or repeated runs, credentials are recommended.
